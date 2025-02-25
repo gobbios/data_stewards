@@ -78,6 +78,7 @@ settings_check <- function(r_packages = NULL) {
   cat("checking RStudio installation:\n")
   cat("------------------------------\n")
   if ("rstudioapi" %in% installed.packages()[, "Package"]) {
+    recentprojects <- character()
     if (os == "mac" | os == "linux") {
       rstudioprefs <- suppressWarnings(readLines("~/.config/rstudio/rstudio-prefs.json"))
       recentprojects <- suppressWarnings(readLines("~/.local/share/rstudio/monitored/lists/project_mru"))
@@ -94,23 +95,23 @@ settings_check <- function(r_packages = NULL) {
 
 
     x <- rstudioprefs[grepl("save_workspace", rstudioprefs)]
-    if (!grepl("never", x)) {
+    if (isTRUE(grepl("never", x))) {
+      cat("good, automatically saving the workspace in RStudio is turned off\n")
+    } else {
       cat("RStudio Setting 'save workspace' is *not* never\n")
       all_good <- FALSE
-    } else {
-      cat("good, automatically saving the workspace in RStudio is turned off\n")
     }
 
     x <- rstudioprefs[grepl("load_workspace", rstudioprefs)]
-    if (!grepl("false", x)) {
+    if (isTRUE(grepl("false", x))) {
+      cat("good, automatically loading the workspace in RStudio is turned off\n")
+    } else {
       cat("RStudio Setting 'load workspace' is *not* disabeled\n")
       all_good <- FALSE
-    } else {
-      cat("good, automatically loading the workspace in RStudio is turned off\n")
     }
 
     if (length(recentprojects) == 0) {
-      cat("it seems you haven't yet used RStudio's project feature, meh\n")
+      cat("it seems you haven't yet used RStudio's project feature, yet, meh\n")
       cat("  (or you recently deleted the project history)\n")
     } else {
       cat("you have", length(recentprojects)," projects in your 'recent projects' list", "\n")
