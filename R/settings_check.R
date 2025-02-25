@@ -37,6 +37,23 @@ settings_check <- function() {
     cat("wohoo, it seems you have git (", gitpresent, " to be precise)\n\n", sep = "")
   }
 
+
+  # check if quarto installed:
+  quartopresent <- tryCatch({
+    system2("quarto", "-v", stdout = TRUE, stderr = NULL)
+  }, error = function(e) {
+    return(NULL)
+  }, warning = function(e) {
+    return(NULL)
+  })
+  if (is.null(quartopresent)) {
+    cat("it seems quarto is not installed\n\n")
+  } else {
+    cat("wohoo, it seems you have quarto (version ", quartopresent, " to be precise)\n\n", sep = "")
+  }
+
+
+
   # Rstudio if active
   if ("rstudioapi" %in% installed.packages()[, "Package"]) {
     if (os == "mac" | os == "linux") {
@@ -51,6 +68,8 @@ settings_check <- function() {
       cat("looks like RStudio is available, but I didn't find the settings file\n")
       return(invisible(NULL))
     }
+    cat("looks like RStudio is installed, whoop whoop\n")
+
 
     x <- rstudioprefs[grepl("save_workspace", rstudioprefs)]
     if (!grepl("never", x)) {
