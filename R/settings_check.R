@@ -77,17 +77,38 @@ settings_check <- function(r_packages = NULL) {
   # Rstudio if active
   cat("checking RStudio installation:\n")
   cat("------------------------------\n")
+
+  foundprefs <- FALSE
+  foundrecentprojs <- FALSE
+
   if ("rstudioapi" %in% installed.packages()[, "Package"]) {
-    recentprojects <- character()
     if (os == "mac" | os == "linux") {
-      rstudioprefs <- suppressWarnings(readLines("~/.config/rstudio/rstudio-prefs.json"))
-      recentprojects <- suppressWarnings(readLines("~/.local/share/rstudio/monitored/lists/project_mru"))
+      f <- "~/.config/rstudio/rstudio-prefs.json"
+      if (file.exists(f)) {
+        rstudioprefs <- suppressWarnings(readLines(f))
+        foundprefs <- TRUE
+      }
+      f <- "~/.local/share/rstudio/monitored/lists/project_mru"
+      if (file.exists(f)) {
+        recentprojects <- suppressWarnings(readLines(f))
+        foundrecentprojs <- TRUE
+      }
     }
     if (os == "win") {
-      rstudioprefs <- suppressWarnings(readLines(normalizePath(file.path(Sys.getenv("APPDATA"), "RStudio", "rstudio-prefs.json"))))
-      recentprojects <- suppressWarnings(readLines(file.path(Sys.getenv("APPDATA"), "..", "Local/RStudio/monitored/lists/project_mru")))
+      f <- normalizePath(file.path(Sys.getenv("APPDATA"), "RStudio", "rstudio-prefs.json"))
+      if (file.exists(f)) {
+        rstudioprefs <- suppressWarnings(readLines(f))
+        foundprefs <- TRUE
+      }
+
+      f <- normalizePath(file.path(Sys.getenv("APPDATA"), "..", "Local/RStudio/monitored/lists/project_mru"))
+      if (file.exists(f)) {
+        recentprojects <- suppressWarnings(readLines(f))
+        foundrecentprojs <- TRUE
+      }
     }
-    if (!exists("rstudioprefs")) {
+
+    if (!foundprefs) {
       cat("looks like RStudio is available, but I didn't find the settings file\n")
       return(invisible(NULL))
     }
@@ -110,12 +131,12 @@ settings_check <- function(r_packages = NULL) {
       all_good <- FALSE
     }
 
-    if (length(recentprojects) == 0) {
-      cat("it seems you haven't yet used RStudio's project feature, yet, meh\n")
-      cat("  (or you recently deleted the project history)\n")
-    } else {
+    if (foundrecentprojs) {
       cat("you have", length(recentprojects)," projects in your 'recent projects' list", "\n")
       cat("  (the oldest one in the list is ", shQuote(basename(recentprojects[length(recentprojects)])), ")\n", sep = "")
+    } else {
+      cat("it seems you haven't yet used RStudio's project feature, yet, meh\n")
+      cat("  (or you recently deleted the project history)\n")
     }
   } else {
     cat("looks like RStudio is not installed\n")
@@ -135,8 +156,6 @@ settings_check <- function(r_packages = NULL) {
         cat("nice, package", shQuote(pk), "is available\n")
     }
   }
-
-
 
   invisible(NULL)
 }
