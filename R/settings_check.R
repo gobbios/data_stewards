@@ -2,6 +2,7 @@
 #'
 #' @param r_packages a character vector with package names. default is
 #'          \code{NULL}, i.e. don't check any package availability.
+#' @param min_r lowest permissable R version
 #' @returns textual output
 #' @export
 #'
@@ -14,13 +15,23 @@
 #' @examples
 #' settings_check()
 #' settings_check(r_packages = c("lme4", "EloSteepness"))
-settings_check <- function(r_packages = NULL) {
+settings_check <- function(r_packages = NULL, min_r = 4.0) {
   if (Sys.info()["sysname"] == "Darwin") os <- "mac"
   if (Sys.info()["sysname"] == "Windows") os <- "win"
   if (Sys.info()["sysname"] == "Linux") os <- "linux"
 
   all_good <- TRUE
 
+  # check R version
+  xx <- sessionInfo()$R.version
+  vnum <- as.numeric(xx$major) +  as.numeric(strsplit(xx$minor, ".", fixed = TRUE)[[1]][1])/10
+  cat("R version is", vnum, "\n")
+  if (vnum < min_r) {
+    cat("oh oh, your R version is too old, it should be at least", min_r, "\n")
+  } else {
+    cat("nice, R is recent enough\n")
+  }
+  cat("\n")
 
   # check if you have git installed:
   gitpresent <- tryCatch({
@@ -30,6 +41,16 @@ settings_check <- function(r_packages = NULL) {
   }, warning = function(e) {
     return(NULL)
   })
+  # a second way
+  if (is.null(gitpresent)) {
+    gitpresent <- tryCatch({
+      system2("git", "--version", stdout = TRUE, stderr = NULL)
+    }, error = function(e) {
+      return(NULL)
+    }, warning = function(e) {
+      return(NULL)
+    })
+  }
 
   cat("checking git installation:\n")
   cat("--------------------------\n")
