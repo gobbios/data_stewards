@@ -1,0 +1,122 @@
+---
+title: "set up git and github"
+format: 
+  revealjs:
+    theme: serif
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# install git and connecting to github
+
+## Mac
+
+- in the console/terminal 
+
+```{bash}
+#| eval: false
+#| echo: true
+#| warning: false
+#| error: false
+xcode-select --install
+```
+
+
+## Windows
+
+
+- install Git Bash from https://gitforwindows.org
+
+- install below `C:/Program Files` 
+
+- when asked about "Adjusting your PATH environment", select "Git from the command line and also from 3rd-party software"
+
+- accept the defaults for everything else
+
+
+## Linux
+
+- I assume you know what you are doing
+
+- if not:
+
+
+```{bash}
+#| eval: false
+#| echo: true
+#| warning: false
+#| error: false
+# Ubuntu / Debian Linux:
+sudo apt-get install git
+
+# Fedora / RedHat Linux:
+sudo yum install git
+```
+
+
+# connect
+
+## access token
+
+- go to R:
+
+```{r, eval = FALSE}
+usethis::create_github_token(description = "this is for trying out GitHub")
+```
+
+- browser opens, leave the settings (30 day expiration)
+
+- click "Generate Token" at the bottom
+
+- now copy the token into the clipboard and paste to a temporary place where you can retrieve it
+
+- it looks something like `ghp_RFf45gW5gxxxxxxxxxxx`
+
+- this is a PAT (personal access token)
+
+
+## connect for real
+
+- back to R
+
+```{r, eval = FALSE}
+gitcreds::gitcreds_set()
+```
+
+- when asked, paste your PAT here
+
+- (if you have an active set of credentials, you may want to keep working with it or delete it)
+
+- you should see something like
+
+```{r}
+#| eval: false
+-> Adding new credentials...
+-> Removing credentials from cache...
+-> Done.
+```
+
+
+## let's check
+
+
+```{r}
+#| eval: false
+usethis::git_sitrep(tool = "github", scope = "user")
+```
+
+
+- if this shows: `Personal access token for "https://github.com": <discovered>` we are good to go
+
+
+- if this shows: `Personal access token for "https://github.com": <unset>` we have to try again
+
+  - or get in touch with me
+
+
+

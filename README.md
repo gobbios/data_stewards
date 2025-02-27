@@ -3,6 +3,23 @@
 </div>
 
 
+
+To render the presentations you need [`quarto`](https://quarto.org).
+
+
+```
+quarto render 00_setup.qmd
+quarto render 01_main.qmd
+quarto render 02_practical.qmd
+```
+
+<br />  
+
+<br />  
+
+<br />  
+
+
 I assume you have some basic R knowledge.
 
 You need a fairly recent R version (say 4.2 or so) and I highly recommend RStudio.

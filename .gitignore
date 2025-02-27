@@ -3,6 +3,9 @@ data_stewards.Rproj
 # History files
 .Rhistory
 .Rapp.history
+*.html
+
+thoughtsandrambles.qmd
 
 # Session Data files
 .RData
