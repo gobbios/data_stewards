@@ -1,0 +1,703 @@
+---
+title: "Version control"
+format: 
+  revealjs:
+    theme: solarized
+  beamer:
+    pdf-engine: xelatex
+---
+
+
+# Overview
+
+. . .
+
+- motivation
+
+. . .
+
+- what is it?
+
+- how can it help?
+
+. . . 
+
+- set up
+
+- practical
+
+
+
+## Motivation
+
+- version control in the context of data integrity
+
+. . .
+
+  - systematic history of changes to data (and analysis scripts, and text, and ...)
+  
+. . .
+
+  - avoid double efforts and pool tools
+
+. . . 
+
+- view version control as part of your workflow
+
+::: {.notes}
+an ecosystem around R and RStudio
+
+with git, rmarkdown, shiny, website building
+
+
+what happens when we detect a problem in a data file
+:::
+
+
+## 
+
+```{r}
+#| fig-align: center
+knitr::include_graphics("images/finaldoc.png")
+```
+
+
+<div style="font-size: 0.3em; position: absolute; bottom: 0; right: 0;">
+Image source: [phdcomics.com](https://phdcomics.com/comics/archive.php?comicid=1531)
+</div>
+
+
+##  take home
+
+:::{.columns}
+
+::: {.column width="40%"}
+
+
+:::  {.fragment}
+- think about a system
+:::
+
+:::  {.fragment}
+- implement it
+:::
+
+:::  {.fragment}
+- don't be afraid
+:::
+
+:::
+
+::: {.column width="60%"}
+
+```{r}
+#| fig-align: center
+#| out-width: 100%
+knitr::include_graphics("images/monaversion.jpeg")
+```
+
+:::
+
+:::
+
+
+<div style="font-size: 0.3em; position: absolute; bottom: 0; right: 0;">
+Image source: [www.reddit.com/r/ProgrammerHumor](https://www.reddit.com/r/ProgrammerHumor/comments/99a9k8/version_control)
+</div>
+
+
+## version control
+
+- is a framework used to track changes made to files 
+
+. . .
+
+- manage code (or documents) as you work 
+
+  - make changes in *incremental* and *discrete* steps
+  - across multiple files (in a repository/folder)
+  - view changes
+  - revert errors
+
+## version control
+
+::: {.incremental}
+- why should you care? (why do I care)
+  - resolve mistakes by switching to the last working copy
+  - find the change that introduced a bug
+  - use it as a backup system!
+  - 'Wait, you didn't want that file deleted?'
+  - collaborate (git's branching system, github's pull requests, github issues)
+  - code your tests and test your code
+  
+- version control helps with all this (to varying degrees)
+:::
+
+## version control cntd
+
+::: {.incremental}
+- **accountability**
+  
+  - *who* did changes and *when*
+  
+  - applies to data[^y75ur] and to analysis scripts
+  
+  - cluster fake[^7rfdfsdg]
+:::
+
+[^y75ur]: as long as they are not binary
+
+[^7rfdfsdg]: [https://datacolada.org/109](https://datacolada.org/109)
+
+
+## git
+
+. . .
+
+- is a command line program
+
+  - graphical user interfaces exist
+  
+  - integrated into a lot of other tools
+
+. . .
+
+- works on **files** in a specific folder/project/repository
+
+. . .
+
+- nicely integrates with RStudio's *project* feature
+
+## git
+
+. . .
+
+- optimized for text based files ("source files")
+
+. . .
+
+- everything else is gonna be a pain
+
+. . .
+
+:::{.columns}
+
+::: {.column width="50%"}
+
+### &#x2705;
+
+- R scripts (Python, too)
+- (R)markdown and friends
+- csv, txt
+:::
+
+::: {.column width="50%"}
+
+### &#x274C;
+
+- R workspaces, environments
+- pdf, docx
+- xls, database
+- images, movies, zip files, executables
+:::
+
+:::
+
+
+## why are binary files not suited for version control?
+
+- git stores full copies of binary files instead of tracking `differences`
+
+- large binary files bloat the repository
+
+- tracking changes is impractical due to non-text-based differences
+
+
+# principles of git usage
+
+
+## committing 
+
+- produces a snapshot of one or multiple files
+
+
+:::{.columns}
+
+::: {.column width="60%"}
+
+::: {.fragment fragment-index=1}
+
+
+### saving copies
+
+data.csv
+:::
+
+::: {.fragment fragment-index=2}
+data_fixed.csv
+:::
+
+::: {.fragment fragment-index=3}
+data_new.csv
+:::
+
+::: {.fragment fragment-index=4}
+data_final.csv
+:::
+
+::: {.fragment fragment-index=5}
+data_final_checked.csv
+:::
+
+::: {.fragment fragment-index=6}
+data_final_checked2.csv
+:::
+
+:::
+
+::: {.column width="40%"}
+
+
+
+::: {.fragment fragment-index=1}
+
+### making commits
+
+::: {.fragment .semi-fade-out fragment-index=2}
+data.csv
+:::
+:::
+
+::: {.fragment fragment-index=2}
+::: {.fragment .semi-fade-out fragment-index=3}
+data.csv
+:::
+:::
+
+::: {.fragment fragment-index=3}
+::: {.fragment .semi-fade-out fragment-index=4}
+data.csv
+:::
+:::
+
+
+::: {.fragment fragment-index=4}
+::: {.fragment .semi-fade-out fragment-index=5}
+data.csv
+:::
+:::
+
+::: {.fragment fragment-index=5}
+::: {.fragment .semi-fade-out fragment-index=6}
+data.csv
+:::
+:::
+
+::: {.fragment fragment-index=6}
+data.csv
+:::
+
+:::
+
+:::
+
+## commits
+
+::: {.incremental}
+- are accompanied by information:
+
+  - who changed the files and when
+  
+  - hash (commit id) 
+  
+  - commit message (manually entered by us)
+
+:::
+
+## commits
+
+```{r}
+#| fig-align: center
+knitr::include_graphics("images/git_illu/illu01.png")
+```
+
+
+## check out (time travel)
+
+- git stores the whole history of all files in your project
+
+. . .
+
+- getting to a specific state (of files) is called **check out** and works via the commit hashes
+
+. . .
+
+- going back means we visit that state, but the other commits still exist
+
+## check out (time travel)
+
+```{r}
+#| fig-align: center
+knitr::include_graphics("images/git_illu/illu02.png")
+```
+
+
+## experiment, aka branching
+
+- try things out while keeping a "working copy"
+
+. . .
+
+- incorporate new features, "work in progress"
+
+. . .
+
+- diverge from the *main branch*[^jghfjg] without fear of breaking things
+
+[^jghfjg]: formerly the default branch was named *master*
+
+## experiment, aka branching
+
+```{r}
+#| fig-align: center
+knitr::include_graphics("images/git_illu/illu03-branches.png")
+```
+
+<!-- #| out-width: 100% -->
+
+::: {.notes}
+not really relevant when it comes to **data**
+:::
+
+
+## merge 
+
+- merging = combine two branches
+
+. . .
+
+- typically we merge an experimental branch back into **main**
+
+. . .
+
+- a merge is a commit
+
+. . .
+
+- (branches do **not** have to be merged)
+
+
+## merge
+
+```{r}
+#| fig-align: center
+knitr::include_graphics("images/git_illu/illu04-merge.png")
+```
+
+
+
+## shared access via remote copy allows collaborating
+
+- copy in remote location? = backup
+
+. . .
+
+- most popular is GitHub
+
+. . .
+
+- everyone sends changes from their local repo **to** the remote: that's **push**ing
+
+. . .
+
+- everyone refreshs their local repo **from** the remote: that's **pull**ing[^gythf]
+
+
+
+[^gythf]: if you pull a specific repository for the first time this is called **clone**ing
+
+
+
+## pull and push
+
+:::{.columns}
+
+::: {.column width="70%"}
+```{r}
+#| fig-align: left
+#| out-width: 100%
+knitr::include_graphics("images/gh/pushpull1.png")
+```
+:::
+
+::: {.column width="30%"}
+everyone at the same state 
+:::
+:::
+
+## pull and push
+
+:::{.columns}
+
+::: {.column width="70%"}
+```{r}
+#| fig-align: left
+#| out-width: 100%
+knitr::include_graphics("images/gh/pushpull2.png")
+```
+:::
+
+::: {.column width="30%"}
+Frank made a commit (to their local repo) 
+:::
+:::
+
+
+## pull and push
+
+:::{.columns}
+
+::: {.column width="70%"}
+```{r}
+#| fig-align: left
+#| out-width: 100%
+knitr::include_graphics("images/gh/pushpull3.png")
+```
+:::
+
+::: {.column width="30%"}
+and then Frank **pushes** it to remote
+:::
+:::
+
+
+## pull and push
+
+:::{.columns}
+
+::: {.column width="70%"}
+```{r}
+#| fig-align: left
+#| out-width: 100%
+knitr::include_graphics("images/gh/pushpull4.png")
+```
+:::
+
+::: {.column width="30%"}
+Dwayne is behind now, and needs to **pull** from the remote to their local repo
+:::
+:::
+
+
+## pull and push
+
+:::{.columns}
+
+::: {.column width="70%"}
+```{r}
+#| fig-align: left
+#| out-width: 100%
+knitr::include_graphics("images/gh/pushpull5.png")
+```
+:::
+
+::: {.column width="30%"}
+now, everyone is in sync again
+:::
+:::
+
+
+## summary
+
+git keeps track of your project
+
+git let's you do time travel
+
+git let's you experiment without fear
+
+github provides a backup and collaboration platform 
+
+
+
+# some more practical issues
+
+
+## alternative ways of working with git
+
+- [GitHub Desktop](https://desktop.github.com/download/)
+
+- [GitKraken](https://www.gitkraken.com/)
+
+- good old command line
+
+- [Visual Studio](https://visualstudio.microsoft.com/)
+
+- [PyCharm](https://www.jetbrains.com/pycharm/)
+
+### use RStudio
+
+- integrates really well with git and github via RStudio projects
+
+
+## it's such an effort and there are way too many options
+
+::: {.incremental}
+- true
+
+- but:
+
+  - you can choose which features you like most and start with that
+  
+  - for me that was usage as a back up system
+
+- uptake in our community is slow
+
+  - anyone here has a supervisor that mentioned version control and collaboration via shared repositories?
+
+:::
+
+## the big picture
+
+::: {.incremental}
+- think about your workflow
+
+- think about your collaborators' workflow
+
+- ask others how they do it!!!
+:::
+
+## github or gitlab?
+
+. . .
+
+- commercial vs non-commercial
+
+. . . 
+
+- features are very similar
+
+. . .
+
+- gitlab a bit trickier to set up (academic cloud, GWDG...)[^rfu48fj]
+
+. . .
+
+- github is "free"
+
+. . .
+
+- github at the basic level is not tied to your institution
+
+[^rfu48fj]: at least that's my experience...
+
+
+
+
+
+
+# use cases
+
+## revert
+
+- revert an **individual file** to its state at a specific **commit**
+
+```{bash}
+#| eval: false
+#| echo: true
+#| warning: false
+#| error: false
+git checkout fae963f -- inst/extdata/activity.csv
+```
+
+
+- you need to know the commit id/hash (here: `fae963f`) -> check on github[^1]
+
+- subsequently commit and push as needed
+
+
+[^1]: or browse through your commits in the local git data (`git log`)
+
+
+## find hash
+
+- get hash (commit id) when a file was changed
+
+
+```{bash}
+#| eval: false
+#| echo: true
+git log -- inst/extdata/activity.csv
+```
+
+. . .
+
+- or with some specific details and prettier formatting:[^3473457]
+  - 3 most recent commits
+  - by whom, how long ago, commit message
+
+```{bash}
+#| eval: false
+#| echo: true
+git log -n 3 --pretty=format:"%h - %an - %ar: %s" -- inst/extdata/activity.csv
+```
+
+```
+a15d8e7 - gobbios - 24 hours ago: reset to empty data tables
+5a61aef - jduboscq - 12 days ago: updated observer and animal id files
+dff4fb9 - gobbios - 1 year, 2 months ago: new batches and helper functions
+```
+
+[^3473457]: I don't know those details by heart and that's fine... 
+
+
+
+
+## Glossary
+
+
+
+
+:::{.columns}
+
+::: {.column width="50%"}
+
+**repository**: your project folder
+
+**commit**: a snapshot of your repo
+
+**hash** an id for a commit
+
+**checkout** time travel to a specific commit
+
+**branch** a movable label that points to a commit
+
+:::
+
+::: {.column width="50%"}
+
+**merge** combining two branches
+
+**remote** a computer with the repository on it
+
+**clone** get the repository from the remote for the first time
+
+**push** send commits to a remote
+
+**pull** get commits from a remote
+
+:::
+
+:::
+
+
+
+
+
+
+ 
+
+
+
+<div style="font-size: 0.3em; position: absolute; bottom: 0; right: 0;">
+[Alice Bartlett: Git for Humans](https://speakerdeck.com/alicebartlett/git-for-humans?slide=93)
+</div>

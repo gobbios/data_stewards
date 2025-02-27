@@ -1,0 +1,242 @@
+---
+title: "practial applications"
+format: 
+  revealjs:
+    theme: solarized
+---
+
+# a first repo {background-image="images/phylo.png" background-size="contain"}
+
+<!-- Data source: [Olsen et al 2009](http://beheco.oxfordjournals.org/content/20/3/624) -->
+
+## goal
+  
+- create a repo on a remote server (GitHub)
+  
+- clone that repo to your local computer as a RStudio project
+
+
+## a new remote repo
+
+- go to github and create a new repo (+ sign in top right corner)
+
+- fill form, importantly:
+  - `public` and initialize with `add readme`
+
+- click `create repository` at bottom
+
+```{r}
+#| fig-align: center
+#| out-width: 150%
+knitr::include_graphics("images/gh/newrepo1.png")
+```
+
+## 
+
+```{r}
+#| fig-align: center
+#| out-width: 150%
+knitr::include_graphics("images/gh/newrepo1.png")
+```
+
+
+## a new remote repo
+
+- get the link (put in the clipboard...)
+
+```{r}
+#| fig-align: center
+#| out-width: 100%
+knitr::include_graphics("images/gh/newrepo2.png")
+```
+
+## clone to local
+
+- head over to RStudio
+
+- File > New Project...
+
+- Select `Version control` > `Git`
+ 
+- fill the form
+
+- think about the location!!![^irdu45]
+
+- (avoid paths with spaces)
+
+
+[^irdu45]: I have all git controlled project in "`~/Documents/projects_local`"
+
+## 
+
+```{r}
+#| fig-align: center
+#| out-width: 100%
+knitr::include_graphics("images/gh/newrepo3.png")
+```
+
+## we did it
+
+```{r}
+#| fig-align: center
+#| out-width: 100%
+knitr::include_graphics("images/gh/newrepo4.png")
+```
+
+
+## we did it
+
+- we now have a pristine folder/project that is now under version control
+
+. . .
+
+- RStudio displays the `git` pane (top right)
+
+. . .
+
+- depending on your system setting you will see some hidden files
+
+  - mostly the actual git data base
+  
+  - RStudio project files
+
+  - ignore these files for now
+  
+
+# first steps in our new repo {background-image="images/better-git-it.png" background-size="50%" background-position="bottom right"}
+
+## goal
+  
+- commit and push a file
+  
+- make changes to that file, and commit and push again
+
+
+## commit and push the data file
+
+:::{.columns}
+::: {.column width="50%"}
+- take the data file from Roger
+
+- move it to the project folder
+
+- watch it appear in RStudio's git pane
+:::
+
+::: {.column width="50%"}
+```{r}
+#| fig-align: center
+#| out-width: 100%
+knitr::include_graphics("images/practical/firststeps1.png")
+```
+:::
+:::
+
+
+## commit and push the data file
+
+- go to the commit dialogue
+
+- select the data file and write a commit message
+
+- and click `commit`
+
+```{r}
+#| fig-align: center
+#| out-width: 100%
+knitr::include_graphics("images/practical/firststeps2.png")
+```
+
+## commit and push the data file
+
+:::{.columns}
+::: {.column width="45%"}
+
+- commit was successful
+
+- (also the top blue line is the actual command to git)
+
+```{r}
+#| fig-align: center
+#| out-width: 100%
+knitr::include_graphics("images/practical/firststeps3.png")
+```
+:::
+
+::: {.column width="55%"}
+
+- data file disappeared from pane
+
+- we are informed that our branch is one commit ahead the remote
+
+```{r}
+#| fig-align: center
+#| out-width: 100%
+knitr::include_graphics("images/practical/firststeps4.png")
+```
+:::
+:::
+
+## commit and push the data file
+
+- let's push (the green arrow)
+
+- and verify in the browser whether it worked
+
+```{r}
+#| fig-align: center
+#| out-width: 100%
+knitr::include_graphics("images/practical/firststeps5.png")
+```
+
+
+## commit and push changes in the data file
+
+- do some edits to the data file 
+
+  - you can do that in RStudio (or if you must use Calc or Excel)
+
+- I deleted some rows
+
+## commit and push changes in the data file
+
+- watch the file name reappear in the git pane after you saved the edits...
+
+```{r}
+#| fig-align: center
+#| out-width: 100%
+knitr::include_graphics("images/practical/firststeps6.png")
+```
+
+- the blue `M` indicates that the file was `m`odified since the last commit
+
+- (the yellow `?` indicate that a file was never committed (yet))
+
+## commit and push changes in the data file
+
+- repeat the commit and push procedure from before
+
+- think of a meaningful commit message
+
+- verify on the remote via browser
+
+
+# congratulations {background-image="images/frodo.jpg" background-size="33%" background-position="right"}
+
+and some words of caution:
+  - only scratched the surface
+
+# encore
+
+up to you what's next
+
+keep going:
+
+  - repeat (parts of the) practical
+  
+  - clone another repo and try to contribute
+  
+  - other ideas? 
+
+
+
