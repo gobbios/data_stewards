@@ -1,3 +1,10 @@
+<div class="figure" style="text-align: center">
+<img src="images/qr-code.png" width="30%" />
+</div>
+
+
+
+
 I assume you have some basic R knowledge.
 
 You need a fairly recent R version (say 4.2 or so) and I highly recommend RStudio.
@@ -114,7 +121,6 @@ gitcreds::gitcreds_set()
 ```
 
 
-
 ```
 usethis::git_sitrep(tool = "github", scope = "user")
 ```
@@ -123,5 +129,7 @@ usethis::git_sitrep(tool = "github", scope = "user")
 
 
 - if this shows: `Personal access token for "https://github.com": <unset>` we have to try again
+
+  - or get in touch with me
 
 
