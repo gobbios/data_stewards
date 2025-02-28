@@ -1,5 +1,7 @@
 ---
 title: "set up git and github"
+author: "Christof Neumann"
+date: "2025-02-28"
 format: 
   revealjs:
     theme: serif

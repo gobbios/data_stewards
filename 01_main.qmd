@@ -1,5 +1,7 @@
 ---
 title: "Version control"
+author: "Christof Neumann"
+date: "2025-02-28"
 format: 
   revealjs:
     theme: solarized
@@ -149,6 +151,46 @@ Image source: [www.reddit.com/r/ProgrammerHumor](https://www.reddit.com/r/Progra
 
 [^7rfdfsdg]: [https://datacolada.org/109](https://datacolada.org/109)
 
+
+## version control in action: mnp database
+
+- long term study of crested macaques (2006-)
+
+. . .
+
+- 87 different observers, 100+ different protocols
+
+. . .
+
+- 45 check functions (2000+ lines of R code)
+
+. . .
+
+- 1000+ lines (and growing) to test whether the check functions do their job
+
+## version control in action: macaquenet database
+
+:::{.columns}
+::: {.column width="60%"}
+```{r}
+#| fig-align: center
+knitr::include_graphics("images/macaquenetflowchart.png")
+```
+:::
+
+::: {.column width="40%"}
+- data h***
+
+- definition of heterogeneous
+
+:::
+:::
+
+
+
+<div style="font-size: 0.3em; position: absolute; bottom: 0; right: 0;">
+[De Moor et al 2025](http://doi.org/10.1111/1365-2656.14223)
+</div>
 
 ## git
 
@@ -410,7 +452,7 @@ knitr::include_graphics("images/git_illu/illu04-merge.png")
 
 . . .
 
-- everyone refreshs their local repo **from** the remote: that's **pull**ing[^gythf]
+- everyone refreshes their local repo **from** the remote: that's **pull**ing[^gythf]
 
 
 

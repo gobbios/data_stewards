@@ -4,7 +4,7 @@ data_stewards.Rproj
 .Rhistory
 .Rapp.history
 *.html
-
+dump/
 thoughtsandrambles.qmd
 
 # Session Data files

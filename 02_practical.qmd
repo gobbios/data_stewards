@@ -1,5 +1,7 @@
 ---
 title: "practial applications"
+author: "Christof Neumann"
+date: "2025-02-28"
 format: 
   revealjs:
     theme: solarized
@@ -223,8 +225,11 @@ knitr::include_graphics("images/practical/firststeps6.png")
 
 # congratulations {background-image="images/frodo.jpg" background-size="33%" background-position="right"}
 
-and some words of caution:
-  - only scratched the surface
+. . .
+
+and a word of caution:
+
+we only scratched the surface
 
 # encore
 
@@ -235,6 +240,8 @@ keep going:
   - repeat (parts of the) practical
   
   - clone another repo and try to contribute
+  
+  - talk about .gitignore
   
   - other ideas? 
 
