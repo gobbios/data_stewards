@@ -9,6 +9,16 @@ format:
     pdf-engine: xelatex
 ---
 
+#
+
+```{r}
+#| fig-align: center
+knitr::include_graphics("images/olsontable.png")
+```
+
+<div style="font-size: 0.3em; position: absolute; bottom: -10; right: 0;">
+[Olson et al. 2009](https://doi.org/10.1093/beheco/arp040)
+</div>
 
 # Overview
 
@@ -50,7 +60,6 @@ format:
 an ecosystem around R and RStudio
 
 with git, rmarkdown, shiny, website building
-
 
 what happens when we detect a problem in a data file
 :::
@@ -185,8 +194,6 @@ knitr::include_graphics("images/macaquenetflowchart.png")
 
 :::
 :::
-
-
 
 <div style="font-size: 0.3em; position: absolute; bottom: 0; right: 0;">
 [De Moor et al 2025](http://doi.org/10.1111/1365-2656.14223)
