@@ -1,11 +1,19 @@
-<div class="figure" style="text-align: center">
-<img src="images/qr-code.png" width="30%" />
-</div>
 
 
+For the moment, the presentations are rendered and can be viewed here:
+
+https://gobbios.quarto.pub/set-up-git-and-github/
+
+https://gobbios.quarto.pub/practial-applications
+
+https://gobbios.quarto.pub/version-control
+
+
+These rendered presentations will be removed eventually, but you can you can render (recreate) them from the source files yourself.
 
 To render the presentations you need [`quarto`](https://quarto.org).
 
+Then in the command line:
 
 ```
 quarto render 00_setup.qmd

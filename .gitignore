@@ -6,6 +6,7 @@ data_stewards.Rproj
 *.html
 dump/
 thoughtsandrambles.qmd
+_publish.yml
 
 # Session Data files
 .RData
