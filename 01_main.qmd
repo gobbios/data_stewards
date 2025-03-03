@@ -566,7 +566,7 @@ github provides a backup and collaboration platform
 
 
 
-# some more practical issues
+# some more practical issues and other considerations
 
 
 ## alternative ways of working with git
@@ -612,6 +612,33 @@ github provides a backup and collaboration platform
 
 - ask others how they do it!!!
 :::
+
+## when should I commit?
+
+- only comit when something is finished, i.e. only after a completed work package
+  
+- if in doubt, commit more frequently rather than too rarely
+
+- don't commit in the middle of something or because you wanna go home
+
+- take a moment to think about the commit before you do commit
+
+- commit message:
+  
+  - short (title plus optional description)
+  
+  - Why was the change necessary? How has it changed?
+
+## should my data live in my repository
+
+- it depends
+
+- if possible: yes!
+
+- for data that is used across multiple projects, a shared data source (which in itself could a repository) is preferable
+
+- for data with privacy issues or other legal concerns, you probably need to find a custom solution
+
 
 ## github or gitlab?
 

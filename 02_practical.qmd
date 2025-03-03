@@ -1,5 +1,5 @@
 ---
-title: "practial applications"
+title: "practical applications"
 author: "Christof Neumann"
 date: "2025-02-28"
 format: 
@@ -64,10 +64,10 @@ knitr::include_graphics("images/gh/newrepo2.png")
 
 - think about the location!!![^irdu45]
 
-- (avoid paths with spaces)
+- (avoid path names with spaces, don't use cloud folder)
 
 
-[^irdu45]: I have all git controlled project in "`~/Documents/projects_local`"
+[^irdu45]: I have all git controlled projects in "`~/Documents/projects_local`"
 
 ## 
 
